@@ -25,7 +25,11 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        include: [path.resolve(__dirname, "src")],
+        include: [
+          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, "node_modules/bootstrap"),
+          path.resolve(__dirname, "node_modules/font-awesome")
+        ],
         use: [
           {
             loader: "style-loader"
@@ -41,6 +45,19 @@ module.exports = {
           },
           {
             loader: "sass-loader"
+          }
+        ]
+      },
+      {
+        test: /\.(eot|otf|svg|ttf|woff|woff2)$/,
+        include: [
+          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, "node_modules/bootstrap"),
+          path.resolve(__dirname, "node_modules/font-awesome")
+        ],
+        use: [
+          {
+            loader: "file-loader"
           }
         ]
       }
