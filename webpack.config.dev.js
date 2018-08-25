@@ -1,6 +1,8 @@
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const path = require("path");
+const history = require("connect-history-api-fallback");
+const c2k = require("koa-connect");
 
 module.exports = {
   mode: "development",
@@ -70,6 +72,9 @@ module.exports = {
   serve: {
     devMiddleware: {
       publicPath: "/assets/"
+    },
+    add(app, middleware, options) {
+      app.use(c2k(history()));
     }
   },
   plugins: [new ForkTsCheckerWebpackPlugin()]
