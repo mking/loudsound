@@ -16,6 +16,8 @@ export default class ConfirmLoginModal extends React.Component<
 > {
   private handleContinue = (e: React.MouseEvent<Button>) => {
     e.preventDefault();
+
+    // TODO(mking): Redirect to the Spotify auth flow.
     history.push(this.props.continueHref!);
   };
 
