@@ -1,3 +1,3 @@
-loudsound
+songify
 ===
-A SoundCloud client
+A Spotify client
