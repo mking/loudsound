@@ -1,3 +1,3 @@
 loudsound
 ===
-a SoundCloud client
+A SoundCloud client

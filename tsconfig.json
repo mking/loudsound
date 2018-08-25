@@ -1,3 +1,14 @@
 {
-  
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["dom", "es6", "dom.iterable"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6"
+  },
+  "include": [
+    "src"
+  ]
 }
