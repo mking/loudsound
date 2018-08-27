@@ -5,7 +5,7 @@ import { SongifyAction } from "../types/songify";
 
 const initialState: ProfilesState = {};
 
-export default function categories(
+export default function profiles(
   state: ProfilesState = initialState,
   action: SongifyAction
 ) {

@@ -1,29 +1,62 @@
 import * as classNames from "classnames";
 import * as React from "react";
 import "./Routes.scss";
-import { Router, Route, Switch } from "react-router-dom";
-import Home from "./Home";
+import { Router, Switch } from "react-router-dom";
 import Login from "./Login";
 import LoginCallback from "./LoginCallback";
-import Songs from "./Songs";
 import { History } from "history";
+import LoggedInRoute from "./LoggedInRoute";
+import LoggedOutRoute from "./LoggedOutRoute";
+import { connect } from "react-redux";
+import { checkToken } from "../actions/logins";
+import Categories from "./Categories";
+import Category from "./Category";
 
-export interface RoutesProps {
+interface RoutesOwnProps {
   className?: string;
   history?: History;
 }
 
-export default function Routes({ className, history }: RoutesProps) {
-  return (
-    <Router history={history}>
-      <div className={classNames("routes", className)}>
-        <Switch>
-          <Route component={Home} exact path="/home" />
-          <Route component={Songs} exact path="/songs" />
-          <Route component={Login} exact path="/" />
-          <Route component={LoginCallback} exact path="/callback" />
-        </Switch>
-      </div>
-    </Router>
-  );
+interface RoutesStateProps {}
+
+interface RoutesDispatchProps {
+  checkToken?(): void;
 }
+
+export type RoutesProps = RoutesOwnProps &
+  RoutesStateProps &
+  RoutesDispatchProps;
+
+export class Routes extends React.Component<RoutesProps> {
+  public componentDidMount() {
+    this.props.checkToken();
+  }
+
+  public render() {
+    return (
+      <Router history={this.props.history}>
+        <div className={classNames("routes", this.props.className)}>
+          <Switch>
+            <LoggedInRoute component={Categories} exact path="/categories" />
+            <LoggedInRoute
+              component={Category}
+              exact
+              path="/categories/:category"
+            />
+            <LoggedOutRoute component={Login} exact path="/" />
+            <LoggedOutRoute component={LoginCallback} exact path="/callback" />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+}
+
+const mapDispatchToProps = {
+  checkToken
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Routes);

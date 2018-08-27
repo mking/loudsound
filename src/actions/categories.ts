@@ -34,7 +34,8 @@ export function fetchCategories(): SongifyThunkAction<void> {
             Authorization: `Bearer ${token}`
           },
           params: {
-            limit: 10
+            limit: 10,
+            country: "US"
           }
         }
       );

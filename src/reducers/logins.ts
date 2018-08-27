@@ -3,9 +3,11 @@ import produce from "immer";
 import { LoginsActionType } from "../constants/logins";
 import { SongifyAction } from "../types/songify";
 
-const initialState: LoginsState = {};
+const initialState: LoginsState = {
+  checkedToken: false
+};
 
-export default function categories(
+export default function logins(
   state: LoginsState = initialState,
   action: SongifyAction
 ) {
@@ -19,6 +21,12 @@ export default function categories(
     case LoginsActionType.INVALIDATE_TOKEN: {
       return produce(state, draft => {
         draft.token = null;
+      });
+    }
+
+    case LoginsActionType.UPDATE_CHECKED_TOKEN: {
+      return produce(state, draft => {
+        draft.checkedToken = action.checkedToken;
       });
     }
 

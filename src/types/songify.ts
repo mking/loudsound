@@ -31,3 +31,7 @@ export type SongifyThunkDispatch = ThunkDispatch<
   SongifyExtraArgument,
   SongifyAction
 >;
+
+export interface SongifyDispatchProp {
+  dispatch?: SongifyThunkDispatch;
+}
