@@ -1,57 +1,37 @@
 import * as classNames from "classnames";
 import * as React from "react";
 import "./Login.scss";
-import { Grid, Form, Button } from "react-bootstrap";
-import ConfirmLoginModal from "./ConfirmLoginModal";
+import { Grid, Button } from "react-bootstrap";
+import { SONGIFY_AUTHORIZE_URL } from "../constants/songify";
 
 export interface LoginProps {
   className?: string;
 }
 
-export interface LoginState {
-  showConfirmLogin?: boolean;
-}
-
-export default class Login extends React.Component<LoginProps, LoginState> {
-  constructor(props: LoginProps) {
-    super(props);
-
-    this.state = {
-      showConfirmLogin: false
-    };
-  }
-
-  private handleSubmit = (e: React.FormEvent<Form>) => {
+export default class Login extends React.Component<LoginProps> {
+  private handleLoginClick = (e: React.MouseEvent<Button>) => {
     e.preventDefault();
-    this.setState({ showConfirmLogin: true });
-  };
-
-  private handleModalSubmit = (e: React.FormEvent<Form>) => {
-    e.preventDefault();
-    this.setState({ showConfirmLogin: true });
-  };
-
-  private handleModalHide = () => {
-    this.setState({ showConfirmLogin: false });
+    window.location.href = SONGIFY_AUTHORIZE_URL;
   };
 
   public render() {
     return (
       <Grid className={classNames("login", this.props.className)}>
         <h1>Welcome to Songify!</h1>
-        <p>Songify is a place for discovering new music and new artists.</p>
-        <Form onSubmit={this.handleSubmit}>
-          <div>
-            <Button bsStyle="danger" bsSize="large" type="submit">
-              Log into Songify
-            </Button>
-          </div>
-        </Form>
-        <ConfirmLoginModal
-          onHide={this.handleModalHide}
-          show={this.state.showConfirmLogin}
-          continueHref="/songs"
-        />
+        <p>
+          Songify shows you new music and artists related to your interests.
+        </p>
+        <p>Please grant access your Spotify account.</p>
+        <div>
+          <Button
+            bsStyle="danger"
+            bsSize="large"
+            type="button"
+            onClick={this.handleLoginClick}
+          >
+            Authorize Spotify
+          </Button>
+        </div>
       </Grid>
     );
   }

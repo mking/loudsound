@@ -1,0 +1,4 @@
+export enum LoginsActionType {
+  UPDATE_TOKEN = "UPDATE_TOKEN",
+  INVALIDATE_TOKEN = "INVALIDATE_TOKEN"
+}

@@ -3,6 +3,7 @@ const autoprefixer = require("autoprefixer");
 const path = require("path");
 const history = require("connect-history-api-fallback");
 const c2k = require("koa-connect");
+const webpack = require("webpack");
 
 module.exports = {
   mode: "development",
@@ -70,6 +71,8 @@ module.exports = {
   },
   devtool: "eval",
   serve: {
+    host: "localhost",
+    port: 8080,
     devMiddleware: {
       publicPath: "/assets/"
     },
@@ -77,5 +80,14 @@ module.exports = {
       app.use(c2k(history()));
     }
   },
-  plugins: [new ForkTsCheckerWebpackPlugin()]
+  plugins: [
+    new ForkTsCheckerWebpackPlugin(),
+    new webpack.DefinePlugin({
+      SONGIFY_CLIENT_ID_ENV: JSON.stringify(process.env.SONGIFY_CLIENT_ID),
+      SONGIFY_CLIENT_SECRET_ENV: JSON.stringify(
+        process.env.SONGIFY_CLIENT_SECRET
+      ),
+      SONGIFY_HOST_ENV: JSON.stringify("http://localhost:8080")
+    })
+  ]
 };
