@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Root from "./components/Root";
+import RootProvider from "./components/RootProvider";
 import "./polyfills";
 import "./styles";
 import { createStore } from "./store";
@@ -10,6 +10,6 @@ const history = createBrowserHistory();
 const store = createStore(history);
 
 ReactDOM.render(
-  <Root store={store} history={history} />,
+  <RootProvider store={store} history={history} />,
   document.getElementById("content")
 );

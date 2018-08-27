@@ -1,18 +1,18 @@
 import * as React from "react";
 import { SongifyStore } from "../types/songify";
 import { Provider } from "react-redux";
-import Routes from "./Routes";
+import RootLayout from "./RootLayout";
 import { History } from "history";
 
-export interface RootProps {
+export interface RootProviderProps {
   store?: SongifyStore;
   history?: History;
 }
 
-export default function Root({ store, history }: RootProps) {
+export default function RootProvider({ store, history }: RootProviderProps) {
   return (
     <Provider store={store}>
-      <Routes history={history} />
+      <RootLayout history={history} />
     </Provider>
   );
 }

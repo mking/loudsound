@@ -1,6 +1,6 @@
 import * as classNames from "classnames";
 import * as React from "react";
-import "./Routes.scss";
+import "./RootLayout.scss";
 import { Router, Switch } from "react-router-dom";
 import Login from "./Login";
 import LoginCallback from "./LoginCallback";
@@ -12,22 +12,22 @@ import { checkToken } from "../actions/logins";
 import Categories from "./Categories";
 import Category from "./Category";
 
-interface RoutesOwnProps {
+interface RootLayoutOwnProps {
   className?: string;
   history?: History;
 }
 
-interface RoutesStateProps {}
+interface RootLayoutStateProps {}
 
-interface RoutesDispatchProps {
+interface RootLayoutDispatchProps {
   checkToken?(): void;
 }
 
-export type RoutesProps = RoutesOwnProps &
-  RoutesStateProps &
-  RoutesDispatchProps;
+export type RootLayoutProps = RootLayoutOwnProps &
+  RootLayoutStateProps &
+  RootLayoutDispatchProps;
 
-export class Routes extends React.Component<RoutesProps> {
+export class RootLayout extends React.Component<RootLayoutProps> {
   public componentDidMount() {
     this.props.checkToken();
   }
@@ -35,7 +35,7 @@ export class Routes extends React.Component<RoutesProps> {
   public render() {
     return (
       <Router history={this.props.history}>
-        <div className={classNames("routes", this.props.className)}>
+        <div className={classNames("root-layout", this.props.className)}>
           <Switch>
             <LoggedInRoute component={Categories} exact path="/categories" />
             <LoggedInRoute
@@ -59,4 +59,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps
-)(Routes);
+)(RootLayout);
